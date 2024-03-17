@@ -5,8 +5,4 @@ const userMessageFirst = prompt("Enter your message: User first");
 const userMessageSecond = prompt("Enter your message: User second");
 const userMessageThird = prompt("Enter your message: User third");
 
-const messageFirst = userMessageFirst;
-const messageSecond = userMessageSecond;
-const messageThird = userMessageThird;
-
-alert(`User message: ${messageFirst}, ${messageSecond}, ${messageThird}.`);
+alert(`User message: ${userMessageFirst}, ${userMessageSecond}, ${userMessageThird}.`);
