@@ -1,18 +1,23 @@
 // Дано масив з елементами різних типів.
 // Створити функцію яка вираховує середнє арифметичне лише числових елементів даного масиву.
 
-let array = ["hello", 3, "world", 6, "image", 9];
-
 function arithmeticMean(array) {
   let sum = 0;
+  let count = 0;
 
   for (let i = 0; i < array.length; i++) {
-    if (typeof array[i] === "number") {
-      sum += array[i];
-    }
+      if (typeof array[i] === "number") {
+          sum += array[i];
+          count++;
+      }
   }
-  return sum / array.length;
+
+  if (count === 0) {
+      return 0;
+  }
+  return sum / count;
 }
 
-console.log(arithmeticMean(array));
-
+let array = ["hello", 3, "world", 6, "image", 9];
+const result = arithmeticMean(array);
+console.log(result); 
