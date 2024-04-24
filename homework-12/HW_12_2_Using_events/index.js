@@ -12,11 +12,5 @@
 const parentElement = document.getElementById("container");
 parentElement.addEventListener("click", function (e) {
   const target = e.target;
-  if (target.id == "btnOne") {
-    alert("You click button one 1");
-  } else if (target.id == "btnTwo") {
-    alert("You click button two 2");
-  } else if (target.id == "btnTree") {
-    alert("You click button tree 3");
-  }
+  alert(`You click button ${target.textContent}`)
 });
