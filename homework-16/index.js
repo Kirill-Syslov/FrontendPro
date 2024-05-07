@@ -15,75 +15,56 @@
 // Не забудьте після того, як напишите цей конструктор, створити 2-3 екземпляри (конкретних студентів) і
 // показати використання цих методів.
 
-const stud = {
-  name: "Jon",
-  surname: "Smith",
-  birthday: new Date(1992, 6, 1),
-  assessments: [100, 100, 100, 100, 87, 93, 99, 76],
-  attendance: [],
-};
-const studTwo = {
-  name: "Kit",
-  surname: "Lon",
-  birthday: new Date(1992, 6, 1),
-  assessments: [90, 100, 80, 97, 89, 100, 100, 100, 100],
-  attendance: [],
-};
-const studTree = {
-  name: "Den",
-  surname: "Klint",
-  birthday: new Date(1992, 6, 1),
-  assessments: [20, 34, 54, 34, 47, 45, 34],
-  attendance: [],
-};
-
-function Student(data) {
-  const { name, surname, birthday, assessments, attendance } = data;
+function Student(name, surname, birthday, assessments) {
   this.name = name;
   this.surname = surname;
+  this.birthday = birthday;
+  this.assessments = assessments;
+  this.attendance = new Array(25).fill(undefined);
 
   this.age = function () {
     const currentDate = new Date();
-    const age = currentDate.getFullYear() - birthday.getFullYear();
+    const age = currentDate.getFullYear() - this.birthday.getFullYear();
     return age;
   };
+
   this.gPA = function () {
     const averageGrade =
-      assessments.reduce((total, grade) => total + grade, 0) /
-      assessments.length;
+      this.assessments.reduce((total, grade) => total + grade, 0) /
+      this.assessments.length;
     return Math.floor(averageGrade);
   };
 
   this.present = function () {
-    if (attendance.length < 25) {
-      attendance.push(true);
+    if (this.attendance.length < 25) {
+      this.attendance.push(true);
     } else {
-      attendance.splice(25);
+      this.attendance.shift();
+      this.attendance.push(true);
     }
-    // console.log(attendance);
   };
+
   this.absent = function () {
-    if (attendance.length < 25) {
-      attendance.push(false);
+    if (this.attendance.length < 25) {
+      this.attendance.push(false);
     } else {
-      attendance.splice(25);
+      this.attendance.shift();
+      this.attendance.push(false);
     }
-    // console.log(attendance);
   };
 
   this.averageAttendance = function () {
-    const presentDays = attendance.filter((day) => day === true).length;
-    const totalDays = attendance.length;
-    const average = presentDays / totalDays;
-    return average;
+    const presentDays = this.attendance.filter((day) => day === true).length;
+    const totalDays = this.attendance.length;
+    return presentDays / totalDays;
   };
 
   this.summary = function () {
     const averageGrade =
-      assessments.reduce((total, grade) => total + grade, 0) /
-      assessments.length;
-    const presentDays = attendance.filter((day) => day === true).length;
-    const totalDays = attendance.length;
+      this.assessments.reduce((total, grade) => total + grade, 0) /
+      this.assessments.length;
+    const presentDays = this.attendance.filter((day) => day === true).length;
+    const totalDays = this.attendance.length;
     const averageAttendance = presentDays / totalDays;
 
     if (averageGrade > 90 && averageAttendance > 0.9) {
@@ -96,32 +77,57 @@ function Student(data) {
   };
 }
 
-const studentOne = new Student(stud);
-studentOne.present();
-studentOne.present();
-studentOne.present();
-studentOne.absent();
-studentOne.absent();
-studentOne.absent();
+const studentOne = new Student(
+  "Jon",
+  "Smith",
+  new Date(1992, 6, 1),
+  [100, 100, 100, 100, 87, 93, 99, 76]
+);
 
-console.log("Name student 1", studentOne.name);
-console.log("Surname student 1", studentOne.surname);
+studentOne.present();
+studentOne.present();
+studentOne.present();
+studentOne.present();
+studentOne.present();
+studentOne.present();
+studentOne.present();
+studentOne.present();
+studentOne.present();
+studentOne.present();
+studentOne.present();
+studentOne.present();
+studentOne.present();
+studentOne.present();
+studentOne.present();
+studentOne.present();
+studentOne.present();
+studentOne.present();
+studentOne.present();
+studentOne.present();
+studentOne.present();
+studentOne.present();
+studentOne.present();
+
+console.log("Name student 1:", studentOne.name);
+console.log("Surname student 1:", studentOne.surname);
 console.log("Age of student 1:", studentOne.age());
 console.log("Average attendance of student 1:", studentOne.averageAttendance());
 console.log("Average grade of student 1:", studentOne.gPA());
 console.log("Summary of student 1:", studentOne.summary());
 
-const studentTwo = new Student(studTwo);
+const studentTwo = new Student(
+  "Kit",
+  "Lon",
+  new Date(1992, 6, 1),
+  [90, 100, 80, 97, 89, 100, 100, 100, 100]
+);
+
 studentTwo.present();
 studentTwo.present();
 studentTwo.present();
-studentTwo.present();
-studentTwo.present();
-studentTwo.present();
-studentTwo.present();
-studentTwo.present();
-studentTwo.present();
-studentTwo.present();
+studentTwo.absent();
+studentTwo.absent();
+studentTwo.absent();
 
 console.log("Name student 2", studentTwo.name);
 console.log("Surname student 2", studentTwo.surname);
@@ -130,14 +136,24 @@ console.log("Average attendance of student 2:", studentTwo.averageAttendance());
 console.log("Average grade of student 2:", studentTwo.gPA());
 console.log("Summary of student 2:", studentTwo.summary());
 
-const studentThree = new Student(studTree);
+const studentThree = new Student(
+  "Den",
+  "Klint",
+  new Date(1992, 6, 1),
+  [20, 34, 54, 34, 47, 45, 34]
+);
 studentThree.present();
 studentThree.present();
 studentThree.present();
 studentThree.absent();
 studentThree.absent();
 studentThree.absent();
-
+studentThree.present();
+studentThree.present();
+studentThree.present();
+studentThree.absent();
+studentThree.absent();
+studentThree.absent();
 
 console.log("Name student 3", studentThree.name);
 console.log("Surname student 3", studentThree.surname);
