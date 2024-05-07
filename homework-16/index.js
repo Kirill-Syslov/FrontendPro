@@ -24,8 +24,7 @@ function Student(name, surname, birthday, assessments) {
 
   this.age = function () {
     const currentDate = new Date();
-    const age = currentDate.getFullYear() - this.birthday.getFullYear();
-    return age;
+    return currentDate.getFullYear() - this.birthday.getFullYear();
   };
 
   this.gPA = function () {
