@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <title>TODO</title>
+      </head>
+      TODO
+      <body>
+        <div class="container">
+          <h1>To Do List</h1>
+          <label>
+            ID:
+            <input type="text" name="id" id="value" placeholder="Add ID" />
+          </label>
+          <label>
+            Text:
+            <input type="text" name="id" id="text" placeholder="Add message" />
+          </label>
+          <div class="btn-container">
+            <button id="get">GET</button>
+            <button id="post">Post</button>
+            <button id="delete">Delete</button>
+            <button id="put">Put</button>
+          </div>
+          <ul id="taskList"></ul>
+        </div>
+
+        <script src="index.js"></script>
+      </body>
+    </html>
+
+    <script>
+      const getResponse = async () => {
+        return fetch("http://localhost:5000/todos", {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+      };
+
+      document.querySelector("#get").addEventListener("click", async () => {
+        const response = await (await getResponse()).json();
+        console.log(response);
+      });
+
+      const postResponse = async () => {
+        return fetch("http://localhost:5000/todos", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            text: "test",
+            checked: false,
+          }),
+        });
+      };
+
+      document.querySelector("#post").addEventListener("click", async () => {
+        const response = await (await postResponse()).json();
+        console.log(response);
+      });
+
+      const deleteResponse = async (id) => {
+        return fetch(`http://localhost:5000/todos/${id}`, {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+        });
+      };
+
+      document.querySelector("#delete").addEventListener("click", async () => {
+        const response = await deleteResponse(
+          document.querySelector("#value").value
+        );
+        const data = await response.json();
+        console.log(data);
+      });
+
+      const putResponse = async (value, id) => {
+        return fetch(`http://localhost:5000/todos/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            checked: false,
+            text: value,
+          }),
+        });
+      };
+
+      document.querySelector("#put").addEventListener("click", async () => {
+        const response = await putResponse(
+          document.querySelector("#text").value,
+          document.querySelector("#value").value
+        );
+        const data = await response.json();
+        console.log(data);
+      });
+    </script>
+  </body>
+</html>
