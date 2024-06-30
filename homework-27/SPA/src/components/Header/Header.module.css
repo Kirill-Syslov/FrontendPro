@@ -1,0 +1,13 @@
+.hed {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    background:rgb(137, 62, 73) ;
+}
+.list {
+    display: flex;
+    width: 40%;
+    margin: auto;
+    justify-content: center;
+    justify-content: space-between;
+}

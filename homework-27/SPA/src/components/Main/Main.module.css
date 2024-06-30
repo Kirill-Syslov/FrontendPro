@@ -1,0 +1,34 @@
+.container {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.title {
+  color: #333;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.todoLi {
+  margin: 5px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f7f7f7;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.deleteTask {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 5px 10;
+  border-radius: 5px;
+  cursor: pointer;
+}
